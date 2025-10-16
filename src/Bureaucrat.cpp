@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:48:15 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 12:52:02 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 13:55:06 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 Bureaucrat::Bureaucrat(const std::string name, int grade)
 	: _name(name), _grade(grade)
 {
+	_assertLevelInRange(grade);
 	std::cout << GREEN << "Constructor called for " << _name << RESET << std::endl;
 }
 // Constructor x copia
@@ -58,12 +59,40 @@ int Bureaucrat::getGrade() const
 // Grade management
 void Bureaucrat::incrementGrade()
 {
+	_assertLevelInRange(_grade - 1);
 	_grade--;
 	std::cout << _name << " has been promoted to level " << _grade << std::endl;
 }
 
 void Bureaucrat::decrementGrade()
 {
+	_assertLevelInRange(_grade + 1);
 	_grade++;
 	std::cout << _name << " has been demoted to level " << _grade << std::endl;
+}
+
+// Exceptions
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Bureaucrat: grade too high (level < 1)";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Bureaucrat: grade too low (level > 150)";
+}
+// Sobrecarga operador <<
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
+{
+	os << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
+	return os;
+}
+
+// Validacion de nivel
+void Bureaucrat::_assertLevelInRange(int grade)
+{
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
 }
