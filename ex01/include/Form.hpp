@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:19:07 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:16:19 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:24:45 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ class Form
 			public:
 				const char* what() const throw();	
 		};
-		
 };
+
+std::ostream& operator<<(std::ostream& os, const Form& f);
 
 #endif // FORM_HPP

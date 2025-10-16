@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:19:12 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:18:43 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:32:53 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,25 @@ int Form::getGradeToExecute() const
 // Signed Form Function
 void Form::beSigned(const Bureaucrat& bureaucrat)
 {
+	if (_isSigned)
+    {
+        std::cout << YELLOW << "Form " << _name << " is already signed." << RESET << std::endl;
+        return;
+    }
+	
 	if (bureaucrat.getGrade() <= _gradeToSign)
 	{
 		_isSigned = true;
+		std::cout << GREEN << bureaucrat.getName()
+                  << " successfully signed form " << _name << RESET << std::endl;
 	}
 	else
+	{
+		std::cout << RED << bureaucrat.getName()
+                  << " cannot sign form " << _name
+                  << " (grade too low)." << RESET << std::endl;
 		throw GradeTooLowException();
+	}
 }
 
 const char* Form::GradeTooHighException::what() const throw()
@@ -102,4 +115,23 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 {
 	return "Form: grade too low (must be <= 150 or insufficient to sign)";
+}
+
+// Sobrecarga operador <<
+std::ostream& operator<<(std::ostream& os, const Form& f)
+{
+	os << "Form \"" << f.getName() << "\", signed: ";
+	
+	if (f.getIsSigned())
+	{
+		os << "yes";
+	}
+	else
+	{
+		os << "no";
+	}
+	os << ", grade to sign: " << f.getGradeToSign()
+       << ", grade to execute: " << f.getGradeToExecute();
+
+	return os;
 }

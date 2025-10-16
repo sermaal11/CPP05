@@ -6,11 +6,12 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:48:15 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:13:48 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:36:32 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
+#include "../include/Form.hpp"
 
 // OCF
 
@@ -65,7 +66,7 @@ int Bureaucrat::getGrade() const
 	return _grade;
 }
 
-// Grade management
+// Grade management and sign forms
 void Bureaucrat::incrementGrade()
 {
 	_assertLevelInRange(_grade - 1);
@@ -78,6 +79,20 @@ void Bureaucrat::decrementGrade()
 	_assertLevelInRange(_grade + 1);
 	_grade++;
 	std::cout << _name << " has been demoted to level " << _grade << std::endl;
+}
+
+void Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << GREEN << _name << " signed " << form.getName() << RESET << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << RED << _name << " couldn’t sign " << form.getName()
+                  << " because " << e.what() << RESET << std::endl;
+	}
 }
 
 // Exceptions

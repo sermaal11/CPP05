@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:48:19 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 18:20:28 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:34:44 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <iostream>
 # include <string>
 # include <exception>
+
+class Form;
 
 class Bureaucrat
 {
@@ -44,9 +46,10 @@ class Bureaucrat
 		const std::string &getName() const;
 		int getGrade() const;
 	
-	// Grade management
+	// Grade management and sign forms
 		void incrementGrade();
 		void decrementGrade();
+		void signForm(Form& form);
 
 	// Nested exceptions
 		class GradeTooHighException : public std::exception
