@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:19:12 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:32:53 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:50:15 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,12 @@ void Form::beSigned(const Bureaucrat& bureaucrat)
         return;
     }
 	
-	if (bureaucrat.getGrade() <= _gradeToSign)
 	{
-		_isSigned = true;
-		std::cout << GREEN << bureaucrat.getName()
-                  << " successfully signed form " << _name << RESET << std::endl;
-	}
-	else
-	{
-		std::cout << RED << bureaucrat.getName()
-                  << " cannot sign form " << _name
-                  << " (grade too low)." << RESET << std::endl;
-		throw GradeTooLowException();
-	}
+    if (bureaucrat.getGrade() <= _gradeToSign)
+        _isSigned = true;
+    else
+        throw GradeTooLowException();
+}
 }
 
 const char* Form::GradeTooHighException::what() const throw()
