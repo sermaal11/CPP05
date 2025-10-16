@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:48:15 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:36:32 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:22:23 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,18 @@ void Bureaucrat::signForm(Form& form)
 {
 	try
 	{
+		bool wasSigned = form.getIsSigned();   // guardamos el estado anterior
+
 		form.beSigned(*this);
-		std::cout << GREEN << _name << " signed " << form.getName() << RESET << std::endl;
+
+		// Solo imprimimos si el formulario ha cambiado de estado
+		if (!wasSigned && form.getIsSigned())
+			std::cout << GREEN << _name << " signed " << form.getName() << RESET << std::endl;
 	}
-	catch(const std::exception& e)
+	catch (const std::exception& e)
 	{
 		std::cout << RED << _name << " couldn’t sign " << form.getName()
-                  << " because " << e.what() << RESET << std::endl;
+				  << " because " << e.what() << RESET << std::endl;
 	}
 }
 

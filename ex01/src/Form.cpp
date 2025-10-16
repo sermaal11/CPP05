@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:19:12 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 19:50:15 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:15:14 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,10 @@ void Form::beSigned(const Bureaucrat& bureaucrat)
         return;
     }
 	
-	{
     if (bureaucrat.getGrade() <= _gradeToSign)
         _isSigned = true;
     else
         throw GradeTooLowException();
-}
 }
 
 const char* Form::GradeTooHighException::what() const throw()
