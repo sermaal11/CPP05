@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:48:19 by sergio            #+#    #+#             */
-/*   Updated: 2025/10/16 12:07:32 by sergio           ###   ########.fr       */
+/*   Updated: 2025/10/16 12:44:45 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,22 @@ class Bureaucrat
 {
 	private:
 		const std::string	_name;
-		int 				_level;
+		int 				_grade;
 	
 	public:
 	// OCF
-		Bureaucrat(const std::string _name, int _level);	//ctor x defecto
+		Bureaucrat(const std::string _name, int _grade);	//ctor x defecto
 		Bureaucrat(const Bureaucrat& other);				//ctor x copia
 		Bureaucrat& operator=(const Bureaucrat& other);		//operador de asig
 		~Bureaucrat();										//dtor x defecto
 		
+	// Getters
+		const std::string &getName() const;
+		int getGrade() const;
 	
-	
+	// Grade management
+		void incrementGrade();
+		void decrementGrade();
 };
 
 #endif // BUREAUCRAT_HPP
